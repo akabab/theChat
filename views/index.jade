@@ -1,7 +1,22 @@
 extends layout
 
 block body
-	h1 -- CHAT --
-	footer
+	h1 Chat
+	div#chat-window.panel.panel-default
+		div.panel-body blablablablablablablablablablablablablablablabla
+		div.panel-body
+			input#message-box.form-control(type="data" placeholder="type your message..")
+			button.btn.btn-default(type="submit") Send
+		div.panel-footer ycribier &copy; 2014
 
-	script(src='/angular.min.js')
+
+
+	script(type="text/javascript", data-require="angular.js@1.2.16" data-semver="1.2.16" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js")
+	script(src="/socket.io/socket.io.js")
+	script(type='text/javascript').
+		var server = io.connect('http://localhost');
+		
+		server.on('message', function (data) {
+			//alert(data.message);
+			server.emit('answer', { my: "Hello, I'm connected!" });
+		});
